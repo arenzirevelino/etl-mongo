@@ -1,0 +1,8 @@
+#envirenment
+.env
+
+#airflow component
+airflow/logs
+airflow/airflow.*
+airflow/airflow-webserver.pid
+.DS_Store
