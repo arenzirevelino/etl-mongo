@@ -6,3 +6,6 @@ airflow/logs
 airflow/airflow.*
 airflow/airflow-webserver.pid
 .DS_Store
+
+#connection string
+airflow/dags/mongoConnectionFile.py
