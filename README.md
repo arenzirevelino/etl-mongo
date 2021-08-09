@@ -13,3 +13,5 @@ Hi, in here I still learn about Airflow but for this I try to create ETL from sa
 1. create project directory, setup environment and setup airflow for this project. for detail step-by-step you can check my previous project **airflow-etl** repo in here: https://github.com/arenzirevelino/airflow-etl
 2. after that install pymongo library using : `pipenv install pymongo`
 3. you can setup free cluster on mongoDB by follow step-by-step from this link https://docs.atlas.mongodb.com/tutorial/deploy-free-tier-cluster/
+
+## Result

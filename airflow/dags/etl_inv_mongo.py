@@ -22,16 +22,16 @@ dag = 	DAG(
 	start_date = days_ago(1),
 	)
 
-LOCAL_DATA_SOURCE = str(os.path.abspath('../../'+'/data/chinook.db'))
-FILE_OUTPUT = str(os.path.abspath('../..'+'/data/chinook_invoice_csv.json'))
-SQL_QUERY = str(os.path.abspath('../..'+'/data/invoice_by_sales.sql'))
+LOCAL_DATA_SOURCE = str(os.path.abspath('../../'+'data/chinook.db'))
+FILE_OUTPUT = str(os.path.abspath('../../'+'data/chinook_invoice_csv.json'))
+SQL_QUERY = str(os.path.abspath('../../'+'data/invoice_by_sales.sql'))
 
 #Mongo Connection
 client = Connect.getConnection() #Connect to MongoDB Cloud on Atlas Cluster
 db_name = client.etl_mongo  #database name
 Collection = db_name['invoice_sales'] #collection name
 
-def extract_transform_data(**kwargs):
+def extract_transform(**kwargs):
     ti = kwargs['ti']
     output_json = FILE_OUTPUT
     conn_local = sqlite3.connect(LOCAL_DATA_SOURCE)
@@ -42,9 +42,9 @@ def extract_transform_data(**kwargs):
         df.to_json(output_json, orient='records')
         ti.xcom_push('chinook_json', output_json)
 
-def load_data(**kwargs):
+def load(**kwargs):
     ti = kwargs['ti']
-    jsonFile = ti.xcom_pull(task_ids='extract_transform_data', key='chinook_json')
+    jsonFile = ti.xcom_pull(task_ids='extract_transform', key='chinook_json')
 
     with open(jsonFile) as file_json:
         json_data = json.load(file_json)
@@ -60,12 +60,12 @@ end			= DummyOperator(
 			task_id='end',
 			dag = dag)
 
-extract_transform_task	= PythonOperator(task_id='extract_transform_data',
-			python_callable = extract_transform_data,
+extract_transform_task	= PythonOperator(task_id='extract_transform',
+			python_callable = extract_transform,
 			dag = dag)
 
-load_task	= PythonOperator(task_id='load_data',
-			python_callable = load_data,
+load_task	= PythonOperator(task_id='load',
+			python_callable = load,
 			dag = dag)
 
 start >> extract_transform_task >> load_task >> end

@@ -12,3 +12,4 @@ from customers as c, invoices as i
 on c.customerid = i.customerid
 join employees as e on e.employeeid = c.supportrepid
 order by employee ASC
+limit 10
