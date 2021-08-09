@@ -15,3 +15,4 @@ Hi, in here I still learn about Airflow but for this I try to create ETL from sa
 3. you can setup free cluster on mongoDB by follow step-by-step from this link https://docs.atlas.mongodb.com/tutorial/deploy-free-tier-cluster/
 
 ## Result
+![Screen Shot 2021-08-09 at 08 28 57](https://user-images.githubusercontent.com/32974468/128652415-302702b7-f0ac-4c04-be4f-b5175e5abf52.png)
