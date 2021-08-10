@@ -52,19 +52,19 @@ def load(**kwargs):
     Collection.insert_many(json_data)
 
 
-start 		= DummyOperator(
-			task_id='start',
-			dag = dag)
+start = DummyOperator(
+		task_id='start',
+		dag = dag)
 
-end			= DummyOperator(
-			task_id='end',
-			dag = dag)
+end	= DummyOperator(
+		task_id='end',
+		dag = dag)
 
-extract_transform_task	= PythonOperator(task_id='extract_transform',
+extract_transform_task = PythonOperator(task_id='extract_transform',
 			python_callable = extract_transform,
 			dag = dag)
 
-load_task	= PythonOperator(task_id='load',
+load_task = PythonOperator(task_id='load',
 			python_callable = load,
 			dag = dag)
 
